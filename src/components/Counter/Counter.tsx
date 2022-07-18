@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { ChangeEventHandler, FC, useState } from "react"
 
 type Props = {
   description: string
@@ -6,6 +6,7 @@ type Props = {
 
 const Counter: FC<Props> = ({ description }) => {
   const [count, setCount] = useState(0)
+  const [incrementor, setIncrementor] = useState(1)
 
   const increment = () => {
     setCount((prev) => prev + 1)
@@ -15,11 +16,24 @@ const Counter: FC<Props> = ({ description }) => {
     setCount((prev) => prev - 1)
   }
 
+  const updateIncrementor: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setIncrementor(+e.target.value)
+  }
+
   return (
     <>
       <h1>{description}</h1>
 
-      <input type="text" />
+      <div>
+        <label htmlFor="incrementor">Increment Value:</label>
+
+        <input
+          type="number"
+          id="incrementor"
+          value={incrementor}
+          onChange={updateIncrementor}
+        />
+      </div>
 
       <div>Current Count: {count}</div>
 

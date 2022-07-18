@@ -29,10 +29,19 @@ describe("Counter", () => {
 
   describe("Incrementor Textbox", () => {
     it("should have an incrementor textbox", () => {
-      expect(screen.getByRole("textbox")).toBeInTheDocument()
+      expect(screen.getByRole("spinbutton")).toBeInTheDocument()
     })
 
-    it.todo("should be able to change the incrementor value")
+    it("should be able to change the incrementor value", async () => {
+      const incrementor: HTMLInputElement = screen.getByRole("spinbutton")
+
+      await userEvent.type(incrementor, "5", {
+        initialSelectionStart: 0,
+        initialSelectionEnd: 1,
+      })
+
+      expect(incrementor.value).toBe("5")
+    })
 
     it.todo(
       "should add the incrementor value when the increment button is clicked"
