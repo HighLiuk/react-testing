@@ -5,9 +5,13 @@ type Props = {
 }
 
 const Counter: FC<Props> = ({ description }) => {
+  const count = 0
+
   return (
     <>
-      <div>{description}</div>
+      <h1>{description}</h1>
+
+      <div>Current Count: {count}</div>
     </>
   )
 }

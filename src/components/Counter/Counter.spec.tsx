@@ -8,7 +8,9 @@ describe("Counter", () => {
     expect(screen.getByText(/My Counter/i)).toBeInTheDocument()
   })
 
-  it.todo("should start with 0")
+  it("should start with 0", () => {
+    expect(screen.getByText(/Current Count: 0/i)).toBeInTheDocument()
+  })
 
   it.todo("should add 1 when the increment button is clicked")
 
