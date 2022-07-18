@@ -9,11 +9,11 @@ const Counter: FC<Props> = ({ description }) => {
   const [incrementor, setIncrementor] = useState(1)
 
   const increment = () => {
-    setCount((prev) => prev + 1)
+    setCount((prev) => prev + incrementor)
   }
 
   const decrement = () => {
-    setCount((prev) => prev - 1)
+    setCount((prev) => prev - incrementor)
   }
 
   const updateIncrementor: ChangeEventHandler<HTMLInputElement> = (e) => {

@@ -11,44 +11,69 @@ describe("Counter", () => {
     })
 
     it("should start with 0", () => {
-      expect(screen.getByText(/Current Count: 0/i)).toBeInTheDocument()
+      expect(currentCount(0)).toBeInTheDocument()
     })
 
     it("should add 1 when the increment button is clicked", async () => {
-      await userEvent.click(screen.getByRole("button", { name: /add/i }))
+      await clickOnAdd()
 
-      expect(screen.getByText(/Current Count: 1/i)).toBeInTheDocument()
+      expect(currentCount(1)).toBeInTheDocument()
     })
 
     it("should subtract 1 when the decrement button is clicked", async () => {
-      await userEvent.click(screen.getByRole("button", { name: /subtract/i }))
+      await clickOnSubtract()
 
-      expect(screen.getByText(/Current Count: -1/i)).toBeInTheDocument()
+      expect(currentCount(-1)).toBeInTheDocument()
     })
   })
 
   describe("Incrementor Textbox", () => {
     it("should have an incrementor textbox", () => {
-      expect(screen.getByRole("spinbutton")).toBeInTheDocument()
+      expect(incrementor()).toBeInTheDocument()
     })
 
     it("should be able to change the incrementor value", async () => {
-      const incrementor: HTMLInputElement = screen.getByRole("spinbutton")
+      await typeIntoIncrementor(5)
 
-      await userEvent.type(incrementor, "5", {
-        initialSelectionStart: 0,
-        initialSelectionEnd: 1,
-      })
-
-      expect(incrementor.value).toBe("5")
+      expect(incrementor().value).toBe("5")
     })
 
-    it.todo(
-      "should add the incrementor value when the increment button is clicked"
-    )
+    it("should add the incrementor value when the increment button is clicked", async () => {
+      await typeIntoIncrementor(5)
+      await clickOnAdd()
+
+      expect(currentCount(5)).toBeInTheDocument()
+    })
 
     it.todo(
       "should subtract the incrementor value when the decrement button is clicked"
     )
   })
 })
+
+function currentCount(count: number) {
+  const pattern = new RegExp(`Current Count: ${count}`, "i")
+
+  return screen.getByText(pattern)
+}
+
+function incrementor(): HTMLInputElement {
+  return screen.getByRole("spinbutton")
+}
+
+async function typeIntoIncrementor(number: number) {
+  const { length } = incrementor().value
+
+  await userEvent.type(incrementor(), number.toString(), {
+    initialSelectionStart: 0,
+    initialSelectionEnd: length,
+  })
+}
+
+async function clickOnAdd() {
+  await userEvent.click(screen.getByRole("button", { name: /add/i }))
+}
+
+async function clickOnSubtract() {
+  await userEvent.click(screen.getByRole("button", { name: /subtract/i }))
+}
