@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import Counter from "./Counter"
 
 describe("Counter", () => {
@@ -12,7 +13,11 @@ describe("Counter", () => {
     expect(screen.getByText(/Current Count: 0/i)).toBeInTheDocument()
   })
 
-  it.todo("should add 1 when the increment button is clicked")
+  it("should add 1 when the increment button is clicked", async () => {
+    await userEvent.click(screen.getByRole("button", { name: /add/i }))
+
+    expect(screen.getByText(/Current Count: 1/i)).toBeInTheDocument()
+  })
 
   it.todo("should subtract 1 when the decrement button is clicked")
 })
