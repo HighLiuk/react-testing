@@ -65,12 +65,8 @@ function incrementor(): HTMLInputElement {
 }
 
 async function typeIntoIncrementor(number: number) {
-  const { length } = incrementor().value
-
-  await userEvent.type(incrementor(), number.toString(), {
-    initialSelectionStart: 0,
-    initialSelectionEnd: length,
-  })
+  await userEvent.clear(incrementor())
+  await userEvent.type(incrementor(), number.toString())
 }
 
 async function clickOnAdd() {
