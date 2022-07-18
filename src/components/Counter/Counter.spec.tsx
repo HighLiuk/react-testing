@@ -45,9 +45,12 @@ describe("Counter", () => {
       expect(currentCount(5)).toBeInTheDocument()
     })
 
-    it.todo(
-      "should subtract the incrementor value when the decrement button is clicked"
-    )
+    it("should subtract the incrementor value when the decrement button is clicked", async () => {
+      await typeIntoIncrementor(10)
+      await clickOnSubtract()
+
+      expect(currentCount(-10)).toBeInTheDocument()
+    })
   })
 })
 
