@@ -11,6 +11,10 @@ const Counter: FC<Props> = ({ description }) => {
     setCount((prev) => prev + 1)
   }
 
+  const decrement = () => {
+    setCount((prev) => prev - 1)
+  }
+
   return (
     <>
       <h1>{description}</h1>
@@ -19,6 +23,10 @@ const Counter: FC<Props> = ({ description }) => {
 
       <button type="button" onClick={increment}>
         ADD
+      </button>
+
+      <button type="button" onClick={decrement}>
+        SUBTRACT
       </button>
     </>
   )

@@ -19,5 +19,9 @@ describe("Counter", () => {
     expect(screen.getByText(/Current Count: 1/i)).toBeInTheDocument()
   })
 
-  it.todo("should subtract 1 when the decrement button is clicked")
+  it("should subtract 1 when the decrement button is clicked", async () => {
+    await userEvent.click(screen.getByRole("button", { name: /subtract/i }))
+
+    expect(screen.getByText(/Current Count: -1/i)).toBeInTheDocument()
+  })
 })
