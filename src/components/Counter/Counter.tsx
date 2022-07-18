@@ -19,6 +19,8 @@ const Counter: FC<Props> = ({ description }) => {
     <>
       <h1>{description}</h1>
 
+      <input type="text" />
+
       <div>Current Count: {count}</div>
 
       <button type="button" onClick={increment}>

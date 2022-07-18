@@ -28,7 +28,9 @@ describe("Counter", () => {
   })
 
   describe("Incrementor Textbox", () => {
-    it.todo("should have an incrementor textbox")
+    it("should have an incrementor textbox", () => {
+      expect(screen.getByRole("textbox")).toBeInTheDocument()
+    })
 
     it.todo("should be able to change the incrementor value")
 
