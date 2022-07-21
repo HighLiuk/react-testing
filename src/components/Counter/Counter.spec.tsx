@@ -1,4 +1,8 @@
-import { render, screen, waitFor } from "@testing-library/react"
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import Counter from "./Counter"
 
@@ -16,10 +20,9 @@ describe("Counter", () => {
 
     it("should add 1 when the increment button is clicked", async () => {
       await clickOnAdd()
+      await spinner()
 
-      await waitFor(() => {
-        expect(currentCount(1)).toBeInTheDocument()
-      })
+      expect(currentCount(1)).toBeInTheDocument()
     })
 
     it("should subtract 1 when the decrement button is clicked", async () => {
@@ -43,10 +46,9 @@ describe("Counter", () => {
     it("should add the incrementor value when the increment button is clicked", async () => {
       await typeIntoIncrementor(5)
       await clickOnAdd()
+      await spinner()
 
-      await waitFor(() => {
-        expect(currentCount(5)).toBeInTheDocument()
-      })
+      expect(currentCount(5)).toBeInTheDocument()
     })
 
     it("should subtract the incrementor value when the decrement button is clicked", async () => {
@@ -79,4 +81,8 @@ async function clickOnAdd() {
 
 async function clickOnSubtract() {
   await userEvent.click(screen.getByRole("button", { name: /subtract/i }))
+}
+
+async function spinner() {
+  return await waitForElementToBeRemoved(() => screen.queryByText("Loading..."))
 }

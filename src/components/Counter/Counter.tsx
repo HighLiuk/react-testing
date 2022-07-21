@@ -7,10 +7,13 @@ type Props = {
 const Counter: FC<Props> = ({ description }) => {
   const [count, setCount] = useState(0)
   const [incrementor, setIncrementor] = useState(1)
+  const [loading, setLoading] = useState(false)
 
   const increment = () => {
+    setLoading(true)
     setTimeout(() => {
       setCount((prev) => prev + incrementor)
+      setLoading(false)
     }, 200)
   }
 
@@ -46,6 +49,9 @@ const Counter: FC<Props> = ({ description }) => {
       <button type="button" onClick={decrement}>
         SUBTRACT
       </button>
+
+      {/* Spinner */}
+      {loading && <div>Loading...</div>}
     </>
   )
 }
