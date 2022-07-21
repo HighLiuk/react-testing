@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import Counter from "./Counter"
 
@@ -17,7 +17,9 @@ describe("Counter", () => {
     it("should add 1 when the increment button is clicked", async () => {
       await clickOnAdd()
 
-      expect(currentCount(1)).toBeInTheDocument()
+      await waitFor(() => {
+        expect(currentCount(1)).toBeInTheDocument()
+      })
     })
 
     it("should subtract 1 when the decrement button is clicked", async () => {
@@ -42,7 +44,9 @@ describe("Counter", () => {
       await typeIntoIncrementor(5)
       await clickOnAdd()
 
-      expect(currentCount(5)).toBeInTheDocument()
+      await waitFor(() => {
+        expect(currentCount(5)).toBeInTheDocument()
+      })
     })
 
     it("should subtract the incrementor value when the decrement button is clicked", async () => {

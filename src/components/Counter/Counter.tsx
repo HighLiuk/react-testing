@@ -9,7 +9,9 @@ const Counter: FC<Props> = ({ description }) => {
   const [incrementor, setIncrementor] = useState(1)
 
   const increment = () => {
-    setCount((prev) => prev + incrementor)
+    setTimeout(() => {
+      setCount((prev) => prev + incrementor)
+    }, 200)
   }
 
   const decrement = () => {
