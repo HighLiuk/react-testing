@@ -24,11 +24,12 @@ const tests = [
 for (const { randomReturn, expectedReturn } of tests) {
   describe(`when Math.random() returns ${randomReturn}`, () => {
     beforeEach(() => {
-      randomSpy.mockReturnValue(randomReturn)
+      randomSpy.mockClear().mockReturnValue(randomReturn)
     })
 
     it(`should return ${expectedReturn} when called with min=3 and max=5`, () => {
       expect(randomBetween(3, 5)).toBe(expectedReturn)
+      expect(Math.random).toHaveBeenCalledTimes(1)
     })
   })
 }
